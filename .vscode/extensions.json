@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "fwcd.kotlin",
+        "vscjava.vscode-gradle",
+        "editorconfig.editorconfig",
+        "eamodio.gitlens",
+        "usernamehw.errorlens"
+    ]
+}
