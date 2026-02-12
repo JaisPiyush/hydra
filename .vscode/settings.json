@@ -28,5 +28,5 @@
   ],
   "gradle.nestedProjects": true,
   "gradle.javaDebug.cleanOutput": false,
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
