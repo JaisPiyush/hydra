@@ -1,0 +1,264 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b51f79975140710bc39edfd1c1444779",
+    "entities": [
+      {
+        "tableName": "blob_metadata",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`blobId` TEXT NOT NULL, `mimeType` TEXT NOT NULL, `sizeBytes` INTEGER NOT NULL, `ownerScopeLabel` TEXT NOT NULL, `originalFileName` TEXT, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`blobId`))",
+        "fields": [
+          {
+            "fieldPath": "blobId",
+            "columnName": "blobId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mimeType",
+            "columnName": "mimeType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sizeBytes",
+            "columnName": "sizeBytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ownerScopeLabel",
+            "columnName": "ownerScopeLabel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalFileName",
+            "columnName": "originalFileName",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "blobId"
+          ]
+        }
+      },
+      {
+        "tableName": "config_entries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scopeLabel` TEXT NOT NULL, `key` TEXT NOT NULL, `value` TEXT, `isSecret` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`scopeLabel`, `key`))",
+        "fields": [
+          {
+            "fieldPath": "scopeLabel",
+            "columnName": "scopeLabel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isSecret",
+            "columnName": "isSecret",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "scopeLabel",
+            "key"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_config_entries_scopeLabel",
+            "unique": false,
+            "columnNames": [
+              "scopeLabel"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_config_entries_scopeLabel` ON `${TABLE_NAME}` (`scopeLabel`)"
+          }
+        ]
+      },
+      {
+        "tableName": "vector_records",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scopeLabel` TEXT NOT NULL, `collection` TEXT NOT NULL, `id` TEXT NOT NULL, `vectorJson` TEXT NOT NULL, `metadata` TEXT, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`scopeLabel`, `collection`, `id`))",
+        "fields": [
+          {
+            "fieldPath": "scopeLabel",
+            "columnName": "scopeLabel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "collection",
+            "columnName": "collection",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vectorJson",
+            "columnName": "vectorJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "metadata",
+            "columnName": "metadata",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "scopeLabel",
+            "collection",
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_vector_records_scopeLabel_collection",
+            "unique": false,
+            "columnNames": [
+              "scopeLabel",
+              "collection"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_vector_records_scopeLabel_collection` ON `${TABLE_NAME}` (`scopeLabel`, `collection`)"
+          }
+        ]
+      },
+      {
+        "tableName": "sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `channelId` TEXT NOT NULL, `remoteId` TEXT NOT NULL, `displayName` TEXT NOT NULL, `state` TEXT NOT NULL, `authRef` TEXT, `metadata` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `lastMessageAt` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "channelId",
+            "columnName": "channelId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteId",
+            "columnName": "remoteId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "displayName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "authRef",
+            "columnName": "authRef",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "metadata",
+            "columnName": "metadata",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastMessageAt",
+            "columnName": "lastMessageAt",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_sessions_channelId_remoteId",
+            "unique": false,
+            "columnNames": [
+              "channelId",
+              "remoteId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sessions_channelId_remoteId` ON `${TABLE_NAME}` (`channelId`, `remoteId`)"
+          },
+          {
+            "name": "index_sessions_channelId",
+            "unique": false,
+            "columnNames": [
+              "channelId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sessions_channelId` ON `${TABLE_NAME}` (`channelId`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b51f79975140710bc39edfd1c1444779')"
+    ]
+  }
+}

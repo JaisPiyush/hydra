@@ -6,6 +6,8 @@ import com.benzenelabs.hydra.host.data.blob.BlobMetadataDao
 import com.benzenelabs.hydra.host.data.blob.BlobMetadataEntity
 import com.benzenelabs.hydra.host.data.config.ConfigEntryDao
 import com.benzenelabs.hydra.host.data.config.ConfigEntryEntity
+import com.benzenelabs.hydra.host.data.session.SessionDao
+import com.benzenelabs.hydra.host.data.session.SessionEntity
 import com.benzenelabs.hydra.host.data.vector.VectorRecordDao
 import com.benzenelabs.hydra.host.data.vector.VectorRecordEntity
 
@@ -21,12 +23,14 @@ import com.benzenelabs.hydra.host.data.vector.VectorRecordEntity
         BlobMetadataEntity::class,
         ConfigEntryEntity::class,
         VectorRecordEntity::class,
+        SessionEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class PublicDatabase : RoomDatabase() {
     abstract fun blobMetadataDao(): BlobMetadataDao
     abstract fun configEntryDao(): ConfigEntryDao
     abstract fun vectorRecordDao(): VectorRecordDao
+    abstract fun sessionDao(): SessionDao
 }
