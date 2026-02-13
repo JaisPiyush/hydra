@@ -149,34 +149,33 @@ class SocketManagerImpl(
         val requestBuilder = Request.Builder().url(handle.url)
         headers.forEach { (key, value) -> requestBuilder.addHeader(key, value) }
 
-        val webSocket =
-                okHttpClient.newWebSocket(
-                        requestBuilder.build(),
-                        object : WebSocketListener() {
-                            override fun onOpen(webSocket: WebSocket, response: Response) {
-                                sockets[handle.id] =
-                                        ManagedSocket.ManagedWebSocket(channelId, handle, webSocket)
-                                emitChannelEvent(channelId, ConnectionEvent.Opened(handle.id))
-                            }
+        okHttpClient.newWebSocket(
+                requestBuilder.build(),
+                object : WebSocketListener() {
+                    override fun onOpen(webSocket: WebSocket, response: Response) {
+                        sockets[handle.id] =
+                                ManagedSocket.ManagedWebSocket(channelId, handle, webSocket)
+                        emitChannelEvent(channelId, ConnectionEvent.Opened(handle.id))
+                    }
 
-                            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-                                sockets.remove(handle.id)
-                                emitChannelEvent(
-                                        channelId,
-                                        ConnectionEvent.Closed(handle.id, code, reason)
-                                )
-                            }
+                    override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+                        sockets.remove(handle.id)
+                        emitChannelEvent(
+                                channelId,
+                                ConnectionEvent.Closed(handle.id, code, reason)
+                        )
+                    }
 
-                            override fun onFailure(
-                                    webSocket: WebSocket,
-                                    t: Throwable,
-                                    response: Response?
-                            ) {
-                                sockets.remove(handle.id)
-                                emitChannelEvent(channelId, ConnectionEvent.Error(handle.id, t))
-                            }
-                        }
-                )
+                    override fun onFailure(
+                            webSocket: WebSocket,
+                            t: Throwable,
+                            response: Response?
+                    ) {
+                        sockets.remove(handle.id)
+                        emitChannelEvent(channelId, ConnectionEvent.Error(handle.id, t))
+                    }
+                }
+        )
 //        sockets[handle.id] = ManagedSocket.ManagedWebSocket(channelId, handle, webSocket)
     }
 

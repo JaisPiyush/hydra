@@ -88,7 +88,7 @@ class FakeChannelBridge(override val channelId: ChannelId) : ChannelBridge {
     }
 
     // Identify as closable for Registry tests
-    fun close() {
+    override suspend fun close() {
         closed = true
     }
 }

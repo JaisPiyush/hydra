@@ -1,7 +1,5 @@
 package com.benzenelabs.hydra.host.channel
 
-import com.benzenelabs.hydra.host.io.IoChannelBridge
-import com.benzenelabs.hydra.host.channel.pipe.PipeChannelBridge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -71,11 +69,7 @@ class ChannelRegistryImpl(
             publishSnapshotLocked()
         }
 
-        when (bridge) {
-            is IoChannelBridge -> bridge.close()
-            is PipeChannelBridge -> bridge.close()
-            else -> Unit
-        }
+        bridge?.close()
     }
 
     override suspend fun find(channelId: ChannelId): ChannelRegistration? = mutex.withLock {

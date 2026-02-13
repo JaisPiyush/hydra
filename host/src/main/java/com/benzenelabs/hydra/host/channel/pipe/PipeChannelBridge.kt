@@ -73,7 +73,7 @@ class PipeChannelBridge(
     }
 
     /** Closes underlying channels to release resources. */
-    suspend fun close() {
+    override suspend fun close() {
         mutex.withLock {
             state = ChannelState.UNREGISTERED
         }

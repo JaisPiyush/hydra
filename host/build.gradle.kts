@@ -51,7 +51,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.okhttp)
+
     implementation(libs.okio)
+
+    debugImplementation(libs.okhttp.logging)
 
 //    testImplementation(libs.androidx)
     testImplementation(libs.junit.jupiter)
@@ -70,7 +73,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.mockito)
     androidTestImplementation(libs.kotlin.mockito)
-    androidTestImplementation(libs.okhttp.mockwebserver)
+    testImplementation(libs.okhttp.mockwebserver)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
     testRuntimeOnly(libs.junit.platform.launcher)

@@ -52,6 +52,14 @@ interface ChannelBridge {
 
     /** A [SharedFlow] of [ChannelEvent] emitted by this bridge. */
     val events: SharedFlow<ChannelEvent>
+
+    /**
+     * Releases resources held by this bridge.
+     *
+     * Implementations may close underlying channels/connections.
+     * Idempotent by contract.
+     */
+    suspend fun close() = Unit
 }
 
 /** Lifecycle event from the socket/transport layer for a specific socket. */
