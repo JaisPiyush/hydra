@@ -1,6 +1,6 @@
 package com.benzenelabs.hydra.host.channel
 
-import com.benzenelabs.hydra.host.channel.io.IoChannelBridge
+import com.benzenelabs.hydra.host.io.IoChannelBridge
 import com.benzenelabs.hydra.host.channel.pipe.PipeChannelBridge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

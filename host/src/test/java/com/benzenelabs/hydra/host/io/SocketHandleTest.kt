@@ -1,5 +1,7 @@
-package com.benzenelabs.hydra.host.channel.io
+package com.benzenelabs.hydra.host.io
 
+import com.benzenelabs.hydra.host.io.SocketHandle
+import com.benzenelabs.hydra.host.io.SocketProtocol
 import java.util.UUID
 import org.junit.Test
 

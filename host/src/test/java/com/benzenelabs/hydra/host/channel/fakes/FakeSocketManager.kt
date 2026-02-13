@@ -2,6 +2,10 @@ package com.benzenelabs.hydra.host.channel.io
 
 import com.benzenelabs.hydra.host.channel.ChannelId
 import com.benzenelabs.hydra.host.channel.ConnectionEvent
+import com.benzenelabs.hydra.host.io.SocketHandle
+import com.benzenelabs.hydra.host.io.SocketManager
+import com.benzenelabs.hydra.host.io.SocketNotFoundException
+import com.benzenelabs.hydra.host.io.SocketProtocol
 import java.util.UUID
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,10 +21,10 @@ class FakeSocketManager : SocketManager {
     private val _connectionEvents = MutableSharedFlow<ConnectionEvent>()
 
     override suspend fun connect(
-            channelId: ChannelId,
-            url: String,
-            protocol: SocketProtocol,
-            headers: Map<String, String>
+        channelId: ChannelId,
+        url: String,
+        protocol: SocketProtocol,
+        headers: Map<String, String>
     ): SocketHandle {
         val id = UUID.randomUUID().toString()
         val handle = SocketHandle(id, url, protocol)

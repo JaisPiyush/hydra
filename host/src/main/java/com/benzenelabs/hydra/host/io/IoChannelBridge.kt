@@ -1,4 +1,4 @@
-package com.benzenelabs.hydra.host.channel.io
+package com.benzenelabs.hydra.host.io
 
 import com.benzenelabs.hydra.host.channel.AuthRequest
 import com.benzenelabs.hydra.host.channel.ChannelBridge

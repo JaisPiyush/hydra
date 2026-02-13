@@ -1,14 +1,17 @@
-package com.benzenelabs.hydra.host.channel.io
+package com.benzenelabs.hydra.host.io
 
 import app.cash.turbine.test
 import com.benzenelabs.hydra.host.channel.ChannelId
 import com.benzenelabs.hydra.host.channel.ConnectionEvent
+import com.benzenelabs.hydra.host.io.SocketManagerImpl
+import com.benzenelabs.hydra.host.io.SocketProtocol
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.robolectric.RobolectricTestRunner
@@ -42,7 +45,7 @@ class SocketManagerTest {
 
     @Test
     fun `connect websocket success`() = runTest {
-        server.enqueue(MockResponse().withWebSocketUpgrade(object : okhttp3.WebSocketListener() {
+        server.enqueue(MockResponse().withWebSocketUpgrade(object : WebSocketListener() {
             override fun onClosing(
                 webSocket: WebSocket,
                 code: Int,
@@ -81,7 +84,7 @@ class SocketManagerTest {
     @Test
     fun `events flow test`() = runTest {
         val cid = ChannelId("com.testflow")
-        server.enqueue(MockResponse().withWebSocketUpgrade(object : okhttp3.WebSocketListener() {
+        server.enqueue(MockResponse().withWebSocketUpgrade(object : WebSocketListener() {
             override fun onClosing(
                 webSocket: WebSocket,
                 code: Int,
